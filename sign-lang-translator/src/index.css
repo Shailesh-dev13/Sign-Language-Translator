@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap');
+
+@import "tailwindcss";
+
+/* ─── Design Tokens ─────────────────────────────────────────────────────── */
+:root {
+  /* Indian Tricolor palette */
+  --saffron: #FF9933;
+  --saffron-deep: #E8720C;
+  --saffron-glow: rgba(255, 153, 51, 0.3);
+  --gold: #FFD54F;
+  --gold-light: #FFF176;
+  --gold-glow: rgba(255, 213, 79, 0.25);
+  --india-green: #138808;
+  --india-green-light: #22C55E;
+  --green-glow: rgba(19, 136, 8, 0.25);
+  --ashoka-blue: #000080;
+  /* Ashoka Chakra navy */
+  --maroon: #800000;
+  /* Deep Indian maroon */
+  --ivory: #FFFFF0;
+  /* Ivory white */
+  --turmeric: #F5A623;
+  /* Turmeric yellow */
+  --peacock: #006B5E;
+  /* Peacock blue-green */
+
+  /* Primary theme */
+  --primary: var(--saffron);
+  --primary-glow: var(--saffron-glow);
+  --secondary: var(--gold);
+  --secondary-glow: var(--gold-glow);
+  --tertiary: var(--india-green);
+  --tertiary-glow: var(--green-glow);
+
+  /* Surface & bg */
+  --bg-deep: #0c0a08;
+  /* Very dark warm charcoal */
+  --bg-card: #1a1714;
+  /* Warm dark brown-black */
+  --bg-surface: #221e1a;
+  --border-subtle: rgba(255, 153, 51, 0.12);
+  --border-hover: rgba(255, 153, 51, 0.35);
+
+  /* Text */
+  --text-primary: #FAF7F2;
+  /* Warm off-white (parchment) */
+  --text-secondary: #D4C9B8;
+  /* Warm grey */
+  --text-muted: #8A7968;
+  /* Warm muted */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    /* Subtle warm noise texture feel */
+    background-image: radial-gradient(ellipse at 20% 50%, rgba(255, 153, 51, 0.03) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(255, 213, 79, 0.02) 0%, transparent 50%);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--saffron-glow) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--saffron), var(--india-green));
+    border-radius: 3px;
+  }
+}
+
+@layer utilities {
+  .text-gradient-primary {
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-tricolor {
+    background: linear-gradient(135deg, var(--saffron), var(--gold), var(--india-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .font-devanagari {
+    font-family: 'Tiro Devanagari Hindi', serif;
+  }
+}
+
+/* ─── Keyframe Animations ───────────────────────────────────────────────── */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes float-slow {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(5deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes ping {
+
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes tricolor-pulse {
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: float 8s ease-in-out infinite 3s;
+}
+
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 60s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 80s linear infinite;
+}
+
+/* ─── Glass Cards (warm tint) ───────────────────────────────────────────── */
+.glass-card {
+  background: rgba(26, 23, 20, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 8px 36px rgba(255, 153, 51, 0.07), 0 0 0 1px rgba(255, 153, 51, 0.05);
+}
+
+/* ─── Indian Rangoli Grid Background ────────────────────────────────────── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 153, 51, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 153, 51, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ─── Rangoli dot-grid pattern ──────────────────────────────────────────── */
+.bg-rangoli-dots {
+  background-image: radial-gradient(circle, rgba(255, 153, 51, 0.15) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ─── Indian border top accent (tricolor) ───────────────────────────────── */
+.tricolor-top {
+  border-top: 3px solid;
+  border-image: linear-gradient(to right, #FF9933 33%, #FFFFFF 33% 66%, #138808 66%) 1;
+}
+
+/* ─── Shimmer effect on text ────────────────────────────────────────────── */
+.shimmer-text {
+  background: linear-gradient(90deg, #FF9933 0%, #FFD54F 25%, #FFFFFF 50%, #FFD54F 75%, #FF9933 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ─── Glow border (tricolor) ────────────────────────────────────────────── */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--saffron), var(--gold), var(--india-green));
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+  filter: blur(10px);
+}
+
+.glow-border:hover::before {
+  opacity: 0.35;
+}
+
+/* ─── Indian section separator ──────────────────────────────────────────── */
+.section-sep {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, var(--saffron), var(--gold));
+  border-radius: 2px;
+  margin: 0 auto 1.5rem;
+}
