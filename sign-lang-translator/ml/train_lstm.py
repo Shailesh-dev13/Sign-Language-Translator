@@ -57,6 +57,6 @@ model.fit(
     validation_data=(X_test, y_test)
 )
 
-model.save('models/isl_lstm.keras')
+model.save('models/asl_lstm.keras')
 
 print('Training complete')

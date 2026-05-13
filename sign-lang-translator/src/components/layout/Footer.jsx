@@ -73,7 +73,7 @@ export default function Footer() {
         <hr className="laser-divider" />
         <div className="py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-mono-label text-[var(--on-surface-variant)] text-xs">
-            © 2024 Signa AI. Cinematic Futurism Interface.
+            © 2026 Signa AI. Cinematic Futurism Interface.
           </p>
           <p
             className="font-mono-label text-xs"

@@ -1,2 +1,0 @@
-tensorflow>=2.16
-tensorflowjs>=4.20

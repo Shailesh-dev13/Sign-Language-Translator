@@ -11,17 +11,14 @@ echo.
 cd /d "%~dp0\.."
 
 :: Activate virtualenv if available
-if exist "..\venv\Scripts\activate.bat" (
+if exist "venv\Scripts\activate.bat" (
     echo [*] Activating venv...
-    call ..\venv\Scripts\activate.bat
-) else if exist "..\venv-tfjs\Scripts\activate.bat" (
-    echo [*] Activating venv-tfjs...
-    call ..\venv-tfjs\Scripts\activate.bat
+    call venv\Scripts\activate.bat
 )
 
 :: Install / update requirements
 echo [1/2] Checking Python dependencies...
-pip install -q -r requirements.txt
+pip install -q -r backend\requirements.txt
 if errorlevel 1 (
     echo [!] Dependency install failed. Check requirements.txt.
     pause

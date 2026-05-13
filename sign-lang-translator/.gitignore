@@ -9,6 +9,7 @@ package-lock.json
 # ── Build output ──
 dist/
 dist-ssr/
+build/
 *.local
 
 # ── Python ──
@@ -22,10 +23,15 @@ __pycache__/
 venv/
 venv-*/
 .venv/
+env/
 *.pyo
 .mypy_cache/
 .pytest_cache/
 .ruff_cache/
+.tox/
+.nox/
+.coverage
+htmlcov/
 
 # ── ML model files (too large for git) ──
 backend/models/asl_model.pth
@@ -36,12 +42,16 @@ ml/data/
 *.h5
 *.tflite
 *.onnx
+*.pth
+*.pt
+*.safetensors
 temp_saved_model/
 
 # ── Environment ──
 .env
 .env.local
 .env.*.local
+.env.production
 
 # ── IDE / Editor ──
 .vscode/*
@@ -53,8 +63,6 @@ temp_saved_model/
 *.njsproj
 *.sln
 *.sw?
-.DS_Store
-Thumbs.db
 
 # ── Logs ──
 logs/
@@ -65,9 +73,14 @@ pnpm-debug.log*
 
 # ── OS ──
 .DS_Store
+Thumbs.db
+Desktop.ini
 *.swp
 *~
 
 # ── Misc ──
 *.zip
 *.tar.gz
+*.rar
+.vercel
+.netlify

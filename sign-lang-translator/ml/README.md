@@ -1,42 +1,48 @@
-# Mudra ML Training
+# Signa AI — ML Training Scripts
 
-This folder contains the training path for the ISL alphabet model.
+This folder contains reference scripts for training the ASL recognition model.
 
-## Input
+> **Note**: The production backend uses a pretrained PyTorch CNN (`asl_model.pth`). These scripts are provided for reproducibility and further experimentation.
 
-Use the cleaned dataset folder:
+## Contents
 
-```text
-C:\Users\prath\Documents\Codex\2026-05-04\browser-plugin-browser-use-openai-bundled\cleaned_isl_dataset_python
-```
+| File | Purpose |
+|------|---------|
+| `collect_data.py` | Webcam data collection with MediaPipe landmarks |
+| `train_lstm.py` | LSTM model training script |
+| `holistic_utils.py` | MediaPipe holistic landmark extraction utilities |
+| `label_map.json` | Class index → label mapping (29 ASL classes) |
 
-It must contain:
+## Training Environment
 
-```text
-train/a ... train/z
-test/a  ... test/z
-```
-
-## Recommended Training Environment
-
-Your current local Python is 3.13, and TensorFlow may not be available for that version on Windows. The easiest path is Google Colab or a local Python 3.11/3.12 environment.
-
-Install:
+**Recommended**: Python 3.11+ with PyTorch 2.x
 
 ```bash
-pip install -r ml/requirements.txt
+pip install torch torchvision mediapipe opencv-python numpy
 ```
 
-Train:
+## Dataset
 
-```bash
-python ml/train_isl_model.py --epochs 15
+The model expects a labeled dataset organized as:
+
+```
+data/
+├── train/
+│   ├── A/
+│   ├── B/
+│   └── ...
+└── test/
+    ├── A/
+    ├── B/
+    └── ...
 ```
 
-The script writes browser-ready TensorFlow.js files to:
+## Model Output
 
-```text
-public/models/isl-alphabet/model.json
+The trained model should be placed in:
+
+```
+backend/models/asl_model.pth
 ```
 
-Once those files exist, the website will load the model automatically.
+The backend will load it automatically on startup.

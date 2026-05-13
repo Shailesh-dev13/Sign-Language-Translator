@@ -13,7 +13,7 @@ export default function DashboardPage() {
   const [confidence, setConfidence] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
 
-  // Backend sends ISL words (e.g. "happy", "good") — treat each as a token
+  // Backend sends ASL signs (e.g. "A", "B") — treat each as a token
   const handleNewLetter = useCallback((word, conf = 0.85) => {
     setLetters((prev) => {
       // Add a space separator between words

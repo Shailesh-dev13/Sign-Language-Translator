@@ -54,14 +54,14 @@ signa-ai/
 │   ├── config.toml           # Server & model configuration
 │   ├── requirements.txt      # Python dependencies
 │   └── models/               # ML model files (not in git)
-│       ├── asl_model.pth     # Pretrained ASL CNN (17MB)
-│       └── hand_landmarker.task  # MediaPipe hand model (8MB)
+│       ├── asl_model.pth     # Pretrained ASL CNN (~17MB)
+│       └── hand_landmarker.task  # MediaPipe hand model (~8MB)
 │
 ├── ml/                       # Training scripts (reference)
 │   ├── collect_data.py       # Webcam data collection
 │   ├── train_lstm.py         # Model training script
-│   ├── label_map.json        # Class index → label mapping
-│   └── COLAB_TRAINING.md     # Google Colab training guide
+│   ├── holistic_utils.py     # Landmark extraction utilities
+│   └── label_map.json        # Class index → label mapping
 │
 ├── src/                      # React frontend
 │   ├── App.jsx               # Root component + routing
@@ -77,14 +77,14 @@ signa-ai/
 │   │   └── ui/               # Generic UI primitives
 │   └── pages/                # Route pages
 │
-├── public/                   # Static assets
+├── public/                   # Static assets (favicon, icons)
 ├── docs/                     # Documentation
 │   └── ARCHITECTURE.md       # System architecture details
 │
 ├── index.html                # Vite entry point
 ├── package.json              # Node dependencies
 ├── vite.config.js            # Vite configuration
-├── tailwind.config.js        # Tailwind CSS theme
+├── eslint.config.js          # ESLint flat config
 ├── .env.example              # Environment variables template
 └── .gitignore
 ```
@@ -102,8 +102,8 @@ signa-ai/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/signa-ai.git
-cd signa-ai
+git clone https://github.com/Shailesh-dev13/Sign-Language-Translator.git
+cd Sign-Language-Translator
 ```
 
 ### 2. Set up the backend
@@ -113,7 +113,7 @@ cd signa-ai
 pip install -r backend/requirements.txt
 
 # Download model files into backend/models/
-# asl_model.pth     → Your pretrained ASL CNN
+# asl_model.pth       → Your pretrained ASL CNN
 # hand_landmarker.task → https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task
 ```
 
@@ -211,5 +211,5 @@ This project is for educational and portfolio purposes.
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by <a href="https://github.com/your-username">Your Name</a></sub>
+  <sub>Built with ❤️ by <a href="https://github.com/Shailesh-dev13">Shailesh</a></sub>
 </div>

@@ -1,6 +1,6 @@
 # =============================================================
 # Signa AI — FastAPI WebSocket Backend
-# Realtime ASL/ISL sign language translation
+# Realtime ASL sign language translation
 # =============================================================
 
 [server]
