@@ -1,7 +1,8 @@
 {
-  "name": "sign-lang-translator",
+  "name": "signa-ai",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
+  "description": "Real-time ASL sign language translator powered by PyTorch and MediaPipe",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,11 +12,11 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.4",
-    "@tensorflow/tfjs": "^4.22.0",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.14.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
+    "react-router-dom": "^7.15.0",
     "react-webcam": "^7.2.0"
   },
   "devDependencies": {

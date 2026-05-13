@@ -1,303 +1,359 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap');
+/* =====================================================
+   Signa AI – Global Styles
+   Design System: "Cinematic Futurism"
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 @import "tailwindcss";
 
-/* ─── Design Tokens ─────────────────────────────────────────────────────── */
+/* ── Design tokens as CSS custom properties ── */
 :root {
-  /* Indian Tricolor palette */
-  --saffron: #FF9933;
-  --saffron-deep: #E8720C;
-  --saffron-glow: rgba(255, 153, 51, 0.3);
-  --gold: #FFD54F;
-  --gold-light: #FFF176;
-  --gold-glow: rgba(255, 213, 79, 0.25);
-  --india-green: #138808;
-  --india-green-light: #22C55E;
-  --green-glow: rgba(19, 136, 8, 0.25);
-  --ashoka-blue: #000080;
-  /* Ashoka Chakra navy */
-  --maroon: #800000;
-  /* Deep Indian maroon */
-  --ivory: #FFFFF0;
-  /* Ivory white */
-  --turmeric: #F5A623;
-  /* Turmeric yellow */
-  --peacock: #006B5E;
-  /* Peacock blue-green */
+  --surface: #141218;
+  --surface-dim: #141218;
+  --surface-lowest: #0f0d13;
+  --surface-low: #1d1b20;
+  --surface-base: #211f24;
+  --surface-high: #2b292f;
+  --surface-highest: #36343a;
+  --surface-bright: #3b383e;
 
-  /* Primary theme */
-  --primary: var(--saffron);
-  --primary-glow: var(--saffron-glow);
-  --secondary: var(--gold);
-  --secondary-glow: var(--gold-glow);
-  --tertiary: var(--india-green);
-  --tertiary-glow: var(--green-glow);
+  --on-surface: #e6e0e9;
+  --on-surface-variant: #cbc4d2;
 
-  /* Surface & bg */
-  --bg-deep: #0c0a08;
-  /* Very dark warm charcoal */
-  --bg-card: #1a1714;
-  /* Warm dark brown-black */
-  --bg-surface: #221e1a;
-  --border-subtle: rgba(255, 153, 51, 0.12);
-  --border-hover: rgba(255, 153, 51, 0.35);
+  --primary: #cfbcff;
+  --primary-container: #6750a4;
+  --on-primary: #381e72;
+  --on-primary-container: #e0d2ff;
 
-  /* Text */
-  --text-primary: #FAF7F2;
-  /* Warm off-white (parchment) */
-  --text-secondary: #D4C9B8;
-  /* Warm grey */
-  --text-muted: #8A7968;
-  /* Warm muted */
+  --secondary: #cdc0e9;
+  --secondary-container: #4d4465;
+
+  --tertiary: #e7c365;
+
+  --outline: #948e9c;
+  --outline-variant: #494551;
+
+  --neon-cyan: #00D2FF;
+  --neon-purple: #9D4EDD;
+
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-hover: rgba(255, 255, 255, 0.18);
+
+  --glow-cyan: rgba(0, 210, 255, 0.2);
+  --glow-cyan-md: rgba(0, 210, 255, 0.35);
+  --glow-purple: rgba(157, 78, 221, 0.2);
 }
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    background-color: var(--bg-deep);
-    color: var(--text-primary);
-    font-family: 'Inter', system-ui, sans-serif;
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    /* Subtle warm noise texture feel */
-    background-image: radial-gradient(ellipse at 20% 50%, rgba(255, 153, 51, 0.03) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(255, 213, 79, 0.02) 0%, transparent 50%);
-  }
-
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--saffron-glow) transparent;
-  }
-
-  *::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  *::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  *::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, var(--saffron), var(--india-green));
-    border-radius: 3px;
-  }
+/* ── Base reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@layer utilities {
-  .text-gradient-primary {
-    background: linear-gradient(135deg, var(--saffron), var(--gold));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .text-gradient-tricolor {
-    background: linear-gradient(135deg, var(--saffron), var(--gold), var(--india-green));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .text-gradient-gold {
-    background: linear-gradient(135deg, var(--gold-light), var(--gold));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .font-devanagari {
-    font-family: 'Tiro Devanagari Hindi', serif;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Keyframe Animations ───────────────────────────────────────────────── */
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-20px);
-  }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--surface);
+  color: var(--on-surface);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
 }
 
-@keyframes float-slow {
-
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(-12px) rotate(5deg);
-  }
+/* ── Typography scale ── */
+.text-display-lg {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.text-display-sm {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
-@keyframes spin-reverse {
-  from {
-    transform: rotate(360deg);
-  }
-
-  to {
-    transform: rotate(0deg);
-  }
+.text-body-md {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
 }
 
-@keyframes pulse-glow {
-
-  0%,
-  100% {
-    opacity: 0.4;
-  }
-
-  50% {
-    opacity: 0.8;
-  }
+.font-mono-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
 }
 
-@keyframes ping {
-
-  75%,
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+.font-mono-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.7;
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -200% center;
-  }
-
-  100% {
-    background-position: 200% center;
-  }
-}
-
-@keyframes tricolor-pulse {
-
-  0%,
-  100% {
-    opacity: 0.6;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-float-delay {
-  animation: float 8s ease-in-out infinite 3s;
-}
-
-.animate-float-slow {
-  animation: float-slow 10s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 4s ease-in-out infinite;
-}
-
-.animate-spin-slow {
-  animation: spin 60s linear infinite;
-}
-
-.animate-spin-reverse {
-  animation: spin-reverse 80s linear infinite;
-}
-
-/* ─── Glass Cards (warm tint) ───────────────────────────────────────────── */
+/* ── GlassCard component ── */
 .glass-card {
-  background: rgba(26, 23, 20, 0.65);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-subtle);
-  border-radius: 1.25rem;
-  transition: all 0.3s ease;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .glass-card:hover {
-  border-color: var(--border-hover);
-  box-shadow: 0 8px 36px rgba(255, 153, 51, 0.07), 0 0 0 1px rgba(255, 153, 51, 0.05);
+  border-color: var(--glass-border-hover);
 }
 
-/* ─── Indian Rangoli Grid Background ────────────────────────────────────── */
-.bg-grid {
-  background-image:
-    linear-gradient(rgba(255, 153, 51, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 153, 51, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
+.glass-card--cyan:hover {
+  box-shadow: 0 4px 32px rgba(0,210,255,0.15), 0 0 0 1px rgba(0,210,255,0.1);
+  border-color: rgba(0,210,255,0.2);
 }
 
-/* ─── Rangoli dot-grid pattern ──────────────────────────────────────────── */
-.bg-rangoli-dots {
-  background-image: radial-gradient(circle, rgba(255, 153, 51, 0.15) 1px, transparent 1px);
-  background-size: 28px 28px;
+.glass-card--purple:hover {
+  box-shadow: 0 4px 32px rgba(157,78,221,0.15), 0 0 0 1px rgba(157,78,221,0.1);
+  border-color: rgba(157,78,221,0.2);
 }
 
-/* ─── Indian border top accent (tricolor) ───────────────────────────────── */
-.tricolor-top {
-  border-top: 3px solid;
-  border-image: linear-gradient(to right, #FF9933 33%, #FFFFFF 33% 66%, #138808 66%) 1;
+/* ── GlowButton component ── */
+.glow-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  color: #fff;
+  box-shadow: 0 0 24px rgba(0,210,255,0.15), 0 0 48px rgba(157,78,221,0.1);
 }
 
-/* ─── Shimmer effect on text ────────────────────────────────────────────── */
-.shimmer-text {
-  background: linear-gradient(90deg, #FF9933 0%, #FFD54F 25%, #FFFFFF 50%, #FFD54F 75%, #FF9933 100%);
-  background-size: 200% auto;
+.glow-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(0,210,255,0.3), 0 8px 60px rgba(157,78,221,0.2);
+}
+
+.glow-btn:active {
+  transform: translateY(0);
+}
+
+.glow-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.glow-btn:hover::before {
+  opacity: 1;
+}
+
+.glow-btn--ghost {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--on-surface);
+  box-shadow: none;
+}
+
+.glow-btn--ghost:hover {
+  border-color: rgba(0,210,255,0.4);
+  background: rgba(0,210,255,0.05);
+  box-shadow: 0 0 20px rgba(0,210,255,0.1);
+}
+
+/* ── AI Status Indicator ── */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+  box-shadow: 0 0 8px var(--neon-cyan), 0 0 16px rgba(0,210,255,0.5);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--neon-cyan), 0 0 16px rgba(0,210,255,0.5); }
+  50% { opacity: 0.6; box-shadow: 0 0 4px var(--neon-cyan), 0 0 8px rgba(0,210,255,0.3); }
+}
+
+/* ── Divider (laser-etched) ── */
+.laser-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(0,210,255,0.3), transparent);
+  border: none;
+  margin: 0;
+}
+
+/* ── Input Fields ── */
+.signa-input {
+  background: rgba(5, 5, 5, 0.8);
+  border: 1px solid var(--outline-variant);
+  border-radius: 0.5rem;
+  color: var(--on-surface);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signa-input::placeholder {
+  color: var(--outline);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+}
+
+.signa-input:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 0 1px rgba(0,210,255,0.3), 0 0 16px rgba(0,210,255,0.1);
+}
+
+/* ── Gradient text ── */
+.text-gradient-cyan {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 4s linear infinite;
 }
 
-/* ─── Glow border (tricolor) ────────────────────────────────────────────── */
-.glow-border {
+.text-gradient-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--surface-lowest); }
+::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--outline); }
+
+/* ── Utility animations ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow-ring {
+  0%   { transform: scale(1);   opacity: 0.4; }
+  70%  { transform: scale(2);   opacity: 0; }
+  100% { transform: scale(1);   opacity: 0; }
+}
+
+@keyframes scan {
+  0%   { top: -2px; }
+  100% { top: 100%; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-fade-in-up { animation: fade-in-up 0.6s ease forwards; }
+
+/* ── Noise overlay ── */
+.noise-overlay::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+}
+
+/* ── Confidence bar ── */
+.confidence-bar {
+  height: 4px;
+  background: var(--surface-high);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.confidence-bar__fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--neon-cyan), var(--neon-purple));
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Navigation active ── */
+.nav-link {
   position: relative;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
-.glow-border::before {
+.nav-link:hover,
+.nav-link.active {
+  color: var(--on-surface);
+}
+
+.nav-link.active::after {
   content: '';
   position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, var(--saffron), var(--gold), var(--india-green));
-  opacity: 0;
-  transition: opacity 0.3s;
-  z-index: -1;
-  filter: blur(10px);
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--neon-cyan), var(--neon-purple));
 }
 
-.glow-border:hover::before {
-  opacity: 0.35;
+/* ── Page wrapper ── */
+.page-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 4rem;
 }
 
-/* ─── Indian section separator ──────────────────────────────────────────── */
-.section-sep {
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(to right, var(--saffron), var(--gold));
-  border-radius: 2px;
-  margin: 0 auto 1.5rem;
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding: 0 1.25rem;
+  }
 }

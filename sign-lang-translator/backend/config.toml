@@ -1,0 +1,25 @@
+# =============================================================
+# Signa AI — FastAPI WebSocket Backend
+# Realtime ASL/ISL sign language translation
+# =============================================================
+
+[server]
+host = "0.0.0.0"
+port = 8000
+log_level = "info"
+
+[model]
+# Path to trained .pth model (relative to backend/)
+path = "models/asl_model.pth"
+# Label map JSON (index → class name)
+label_map = "../ml/label_map.json"
+# Input sequence length (frames)
+sequence_length = 30
+# Confidence threshold to emit a prediction
+confidence_threshold = 0.55
+# MediaPipe: minimum detection confidence
+mp_detection_confidence = 0.7
+mp_tracking_confidence = 0.7
+
+[cors]
+origins = ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000"]
