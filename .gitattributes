@@ -1,0 +1,42 @@
+# ====================================
+# Signa AI — .gitattributes
+# Normalize line endings across platforms
+# ====================================
+
+# Default: auto-normalize all text files to LF in the repo
+* text=auto eol=lf
+
+# Force LF for source files
+*.js       text eol=lf
+*.jsx      text eol=lf
+*.ts       text eol=lf
+*.tsx      text eol=lf
+*.css      text eol=lf
+*.html     text eol=lf
+*.json     text eol=lf
+*.md       text eol=lf
+*.py       text eol=lf
+*.toml     text eol=lf
+*.txt      text eol=lf
+*.yml      text eol=lf
+*.yaml     text eol=lf
+*.svg      text eol=lf
+
+# Windows scripts keep CRLF
+*.bat      text eol=crlf
+*.cmd      text eol=crlf
+*.ps1      text eol=crlf
+
+# Binary files — no line ending conversion
+*.pth      binary
+*.task     binary
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.ico      binary
+*.woff     binary
+*.woff2    binary
+*.ttf      binary
+*.eot      binary
+*.otf      binary
