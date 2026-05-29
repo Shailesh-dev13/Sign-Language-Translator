@@ -9,7 +9,7 @@
  *   Webcam → useSignaWebSocket → FastAPI → MediaPipe HandLandmarker + ASLNet → prediction
  */
 
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import Webcam from 'react-webcam';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Camera, RefreshCw, Hand, Zap } from 'lucide-react';
@@ -81,7 +81,7 @@ function LandmarkCount({ count }) {
 }
 
 // ── Main component ────────────────────────────────────────────────────────────
-export default function TranslatorView({ onNewLetter }) {
+export default function TranslatorView({ onNewLetter, onStreamingChange }) {
   const webcamRef   = useRef(null);
   const [cameraError, setCameraError] = useState('');
   const [isReady,     setIsReady]     = useState(false);
@@ -109,6 +109,11 @@ export default function TranslatorView({ onNewLetter }) {
 
   const isWsReady  = connectionState === WS_STATE.READY;
   const isStreaming = isWsReady && isReady && isOn;
+
+  // Notify parent of streaming state changes
+  useEffect(() => {
+    onStreamingChange?.(isStreaming);
+  }, [isStreaming, onStreamingChange]);
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (

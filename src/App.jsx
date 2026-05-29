@@ -1,14 +1,45 @@
-// src/App.jsx
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// src/App.jsx — Updated with ParticleBackground, AnimatePresence routes, and new pages.
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+import ParticleBackground from './components/ui/ParticleBackground';
 import LandingPage from './pages/LandingPage';
 import DashboardPage from './pages/DashboardPage';
+import DictionaryPage from './pages/DictionaryPage';
+import LearningPage from './pages/LearningPage';
+import CommunityPage from './pages/CommunityPage';
 import PlaceholderPage from './pages/PlaceholderPage';
 
 /**
- * Root application shell — handles routing between landing page
- * and the translator dashboard. Navbar + Footer persist across all routes.
+ * AnimatedRoutes — uses useLocation so AnimatePresence can detect route changes.
+ */
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/"           element={<LandingPage />} />
+        <Route path="/dashboard"  element={<DashboardPage />} />
+        <Route path="/dictionary" element={<DictionaryPage />} />
+        <Route path="/learning"   element={<LearningPage />} />
+        <Route path="/community"  element={<CommunityPage />} />
+        <Route path="/privacy"    element={<PlaceholderPage />} />
+        <Route path="/terms"      element={<PlaceholderPage />} />
+        <Route path="/docs"       element={<PlaceholderPage />} />
+        <Route path="/support"    element={<PlaceholderPage />} />
+        {/* Catch-all */}
+        <Route path="*"           element={<PlaceholderPage />} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
+
+/**
+ * Root application shell.
+ * ParticleBackground sits behind everything at z-0.
+ * Navbar and Footer persist across all routes.
  */
 export default function App() {
   return (
@@ -22,28 +53,17 @@ export default function App() {
         Skip to main content
       </a>
 
+      {/* Animated particle neural network */}
+      <ParticleBackground />
+
       {/* Noise overlay */}
       <div className="noise-overlay" aria-hidden="true" />
 
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen" style={{ position: 'relative', zIndex: 1 }}>
         <Navbar />
-
         <div className="flex-1">
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/dictionary" element={<PlaceholderPage />} />
-            <Route path="/learning" element={<PlaceholderPage />} />
-            <Route path="/community" element={<PlaceholderPage />} />
-            <Route path="/privacy" element={<PlaceholderPage />} />
-            <Route path="/terms" element={<PlaceholderPage />} />
-            <Route path="/docs" element={<PlaceholderPage />} />
-            <Route path="/support" element={<PlaceholderPage />} />
-            {/* Catch-all */}
-            <Route path="*" element={<PlaceholderPage />} />
-          </Routes>
+          <AnimatedRoutes />
         </div>
-
         <Footer />
       </div>
     </BrowserRouter>
