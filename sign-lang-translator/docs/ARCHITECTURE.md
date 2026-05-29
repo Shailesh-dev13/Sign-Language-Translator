@@ -75,21 +75,35 @@ The frontend sends frames at ~6.7 fps (150ms interval) rather than the webcam's 
 ## Frontend Component Tree
 
 ```
-App
-├── Navbar
-├── Routes
-│   ├── LandingPage
-│   │   ├── HeroSection
-│   │   ├── FeaturesSection
-│   │   └── CTASection
-│   ├── DashboardPage
-│   │   ├── TranslatorView  ← uses useSignaWebSocket hook
-│   │   │   ├── ConnectionBadge
-│   │   │   ├── Top5Panel
-│   │   │   └── LatencyBadge
-│   │   └── TranslationPanel
-│   │       ├── ConfidenceBar
-│   │       └── PredictionHistory
-│   └── PlaceholderPage
-└── Footer
+Root (main.jsx)
+├── LoadingScreen          ← once-per-session cinematic boot sequence
+└── App
+    ├── ParticleBackground ← animated neural-net canvas (z-0)
+    ├── Navbar             ← sliding active indicator, mobile drawer
+    ├── Routes (AnimatePresence)
+    │   ├── LandingPage
+    │   │   ├── HeroSection      ← 3D HandModel (react-three-fiber)
+    │   │   ├── FeaturesSection
+    │   │   └── CTASection
+    │   ├── DashboardPage
+    │   │   ├── LiveMetricsPanel ← FPS, confidence, session timer
+    │   │   ├── TranslatorView   ← uses useSignaWebSocket hook
+    │   │   │   ├── ConnectionBadge
+    │   │   │   ├── Top5Panel
+    │   │   │   └── LatencyBadge
+    │   │   ├── TranslationPanel
+    │   │   │   ├── ConfidenceBar
+    │   │   │   └── PredictionHistory
+    │   │   └── AIPipeline       ← animated inference pipeline vis
+    │   ├── DictionaryPage
+    │   │   ├── SignCard          ← ASL sign reference cards
+    │   │   └── Category tabs (Alphabet, Numbers, Common)
+    │   ├── LearningPage
+    │   │   ├── LessonCard        ← structured lessons with XP
+    │   │   ├── LessonDetail      ← sign grid + progress tracker
+    │   │   └── QuizMode          ← interactive sign identification
+    │   ├── CommunityPage         ← resources, orgs, accessibility
+    │   └── PlaceholderPage       ← catch-all for unbuilt routes
+    └── Footer
 ```
+

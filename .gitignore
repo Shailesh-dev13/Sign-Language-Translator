@@ -1,5 +1,5 @@
 # ====================================
-# Signa AI — .gitignore
+# Signa AI — Root .gitignore
 # ====================================
 
 # ── Dependencies ──
@@ -32,7 +32,7 @@ env/
 .coverage
 htmlcov/
 
-# ── ML model files (too large for git) ──
+# ── ML training artifacts (too large for git) ──
 ml/trained_model/
 ml/data/
 *.keras

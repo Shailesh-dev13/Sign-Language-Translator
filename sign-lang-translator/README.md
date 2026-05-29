@@ -24,6 +24,13 @@
 - **WebSocket streaming** — Low-latency bidirectional communication between frontend and backend
 - **Cinematic UI** — Dark-mode glassmorphism dashboard with live confidence bars and prediction history
 - **Privacy-first** — All inference happens locally; no data leaves your machine
+- **3D Hand Experience** — Interactive hand model rendered with React Three Fiber on the landing page
+- **ASL Dictionary** — Searchable reference library with alphabet, numbers, and common signs
+- **Learning System** — Structured lessons with XP tracking, progress bars, and interactive quiz mode
+- **Community Hub** — Curated resources, Deaf community organizations, and accessibility tools
+- **Cinematic Loading Screen** — Terminal-style boot sequence shown once per browser session
+- **Live Dashboard Metrics** — Real-time FPS, confidence, session timer, and AI pipeline visualization
+- **Speech Synthesis** — Text-to-speech playback of translated sign sequences
 
 ---
 
@@ -40,6 +47,8 @@
 └─────────────────┘                          └─────────────────────┘
 ```
 
+See [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) for detailed system architecture, data flow diagrams, and design decisions.
+
 ---
 
 ## 📁 Project Structure
@@ -53,7 +62,7 @@ signa-ai/
 │   ├── websocket_handler.py  # WebSocket router
 │   ├── config.toml           # Server & model configuration
 │   ├── requirements.txt      # Python dependencies
-│   └── models/               # ML model files (not in git)
+│   └── models/               # ML model files
 │       ├── asl_model.pth     # Pretrained ASL CNN (~17MB)
 │       └── hand_landmarker.task  # MediaPipe hand model (~8MB)
 │
@@ -65,17 +74,45 @@ signa-ai/
 │
 ├── src/                      # React frontend
 │   ├── App.jsx               # Root component + routing
-│   ├── main.jsx              # React entry point
+│   ├── main.jsx              # React entry point + LoadingScreen
 │   ├── index.css             # Global styles + design tokens
+│   ├── animations/           # Framer Motion variants
+│   │   └── variants.js
 │   ├── hooks/                # Custom React hooks
-│   │   └── useSignaWebSocket.js  # WebSocket management
+│   │   ├── useSignaWebSocket.js  # WebSocket management
+│   │   └── useSessionMetrics.js  # FPS + session tracking
 │   ├── components/           # Reusable UI components
-│   │   ├── TranslatorView.jsx
+│   │   ├── LoadingScreen.jsx # Cinematic boot sequence
+│   │   ├── TranslatorView.jsx# Webcam + prediction overlay
 │   │   ├── dashboard/        # Dashboard-specific components
+│   │   │   ├── AIPipeline.jsx
+│   │   │   ├── ConfidenceBar.jsx
+│   │   │   ├── ConnectionBadge.jsx
+│   │   │   ├── LiveMetricsPanel.jsx
+│   │   │   ├── PredictionHistory.jsx
+│   │   │   └── TranslationPanel.jsx
 │   │   ├── layout/           # Navbar, Footer
 │   │   ├── sections/         # Landing page sections
 │   │   └── ui/               # Generic UI primitives
+│   │       ├── GlassCard.jsx
+│   │       ├── GlowButton.jsx
+│   │       ├── LessonCard.jsx
+│   │       ├── Logo.jsx
+│   │       ├── ParticleBackground.jsx
+│   │       ├── QuizMode.jsx
+│   │       ├── SignCard.jsx
+│   │       └── StatusDot.jsx
+│   ├── three/                # 3D components
+│   │   └── HandModel.jsx     # Interactive hand (R3F)
+│   ├── utils/
+│   │   └── aslData.js        # ASL sign definitions & lessons
 │   └── pages/                # Route pages
+│       ├── LandingPage.jsx
+│       ├── DashboardPage.jsx
+│       ├── DictionaryPage.jsx
+│       ├── LearningPage.jsx
+│       ├── CommunityPage.jsx
+│       └── PlaceholderPage.jsx
 │
 ├── public/                   # Static assets (favicon, icons)
 ├── docs/                     # Documentation
@@ -86,6 +123,7 @@ signa-ai/
 ├── vite.config.js            # Vite configuration
 ├── eslint.config.js          # ESLint flat config
 ├── .env.example              # Environment variables template
+├── .gitattributes            # Line ending normalization
 └── .gitignore
 ```
 
@@ -103,7 +141,7 @@ signa-ai/
 
 ```bash
 git clone https://github.com/Shailesh-dev13/Sign-Language-Translator.git
-cd Sign-Language-Translator
+cd Sign-Language-Translator/sign-lang-translator
 ```
 
 ### 2. Set up the backend
@@ -112,15 +150,16 @@ cd Sign-Language-Translator
 # Install Python dependencies
 pip install -r backend/requirements.txt
 
-# Download model files into backend/models/
-# asl_model.pth       → Your pretrained ASL CNN
-# hand_landmarker.task → https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task
+# Model files are included in the repo:
+# backend/models/asl_model.pth       — Pretrained ASL CNN
+# backend/models/hand_landmarker.task — MediaPipe hand model
+#   (or download from https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task)
 ```
 
 ### 3. Start the backend server
 
 ```bash
-# From the project root
+# From the sign-lang-translator directory
 uvicorn backend.app:app --reload --host 0.0.0.0 --port 8000
 ```
 
@@ -142,7 +181,7 @@ cp .env.example .env
 npm run dev
 ```
 
-Open http://localhost:5173/dashboard to start translating!
+Open http://localhost:5173 to see the landing page, or go directly to http://localhost:5173/dashboard to start translating!
 
 ---
 
@@ -195,12 +234,46 @@ Open http://localhost:5173/dashboard to start translating!
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
-|-------|-----------|
-| **Frontend** | React 19, Tailwind CSS v4, Framer Motion, Vite |
+|-------|-----------:|
+| **Frontend** | React 19, Tailwind CSS v4, Framer Motion, Vite 8 |
+| **3D Graphics** | Three.js, React Three Fiber, Drei |
 | **Backend** | FastAPI, Starlette WebSockets, Uvicorn |
 | **ML Inference** | PyTorch 2.x, MediaPipe Tasks Vision API |
 | **Hand Detection** | MediaPipe HandLandmarker (float16) |
 | **Classification** | Custom ASLNet CNN (29 classes, 64×64 input) |
+
+---
+
+## 📸 Screenshots
+
+> Screenshots coming soon. Run the project locally to experience the full cinematic UI.
+
+---
+
+## 🗺️ Future Roadmap
+
+- [ ] **Two-hand sign support** — Extend model to recognize signs requiring both hands
+- [ ] **Word-level recognition** — Move beyond fingerspelling to full ASL word/phrase detection
+- [ ] **Sentence formation** — NLP post-processing to form grammatically correct sentences
+- [ ] **GPU acceleration** — CUDA/MPS support for faster backend inference
+- [ ] **Mobile PWA** — Progressive Web App for on-the-go ASL translation
+- [ ] **User accounts** — Cloud sync for learning progress and quiz scores
+- [ ] **Video recording** — Record and share translation sessions
+- [ ] **Browser-side inference** — ONNX/TFLite model for fully client-side translation
+- [ ] **Multi-language support** — Extend to BSL, JSL, and other sign languages
+- [ ] **Accessibility audit** — WCAG 2.1 AA compliance and screen reader optimization
+
+---
+
+## 👥 Contributors
+
+<a href="https://github.com/Shailesh-dev13">
+  <img src="https://github.com/Shailesh-dev13.png" width="80" style="border-radius:50%;" alt="Shailesh" />
+</a>
+
+**[Shailesh](https://github.com/Shailesh-dev13)** — Creator & Lead Developer
+
+Contributions, issues, and feature requests are welcome! Feel free to open an issue or submit a pull request.
 
 ---
 
