@@ -250,39 +250,40 @@ Open http://localhost:5173 to see the landing page, or go directly to http://loc
 
 ---
 
-## 🗺️ Future Roadmap
+## 🚀 Future Goals
 
-- [ ] **Two-hand sign support** — Extend model to recognize signs requiring both hands
-- [ ] **Word-level recognition** — Move beyond fingerspelling to full ASL word/phrase detection
-- [ ] **Sentence formation** — NLP post-processing to form grammatically correct sentences
-- [ ] **GPU acceleration** — CUDA/MPS support for faster backend inference
-- [ ] **Mobile PWA** — Progressive Web App for on-the-go ASL translation
-- [ ] **User accounts** — Cloud sync for learning progress and quiz scores
-- [ ] **Video recording** — Record and share translation sessions
-- [ ] **Browser-side inference** — ONNX/TFLite model for fully client-side translation
-- [ ] **Multi-language support** — Extend to BSL, JSL, and other sign languages
-- [ ] **Accessibility audit** — WCAG 2.1 AA compliance and screen reader optimization
+### AI & Model Improvements
+- Improve ASL recognition accuracy through larger and more diverse datasets
+- Add prediction smoothing and confidence stabilization
+- Support dynamic gestures and continuous sign recognition
+- Implement sentence-level translation
 
----
+### User Experience
+- Interactive onboarding experience
+- Enhanced loading animations and AI status indicators
+- Accessibility improvements
+- Custom themes and user preferences
 
-## 👥 Contributors
+### Learning Platform
+- Interactive ASL lessons
+- Progress tracking system
+- Practice quizzes and assessments
+- Beginner-to-advanced learning paths
 
-<a href="https://github.com/Shailesh-dev13">
-  <img src="https://github.com/Shailesh-dev13.png" width="80" style="border-radius:50%;" alt="Shailesh" />
-</a>
+### Dictionary Expansion
+- Complete ASL alphabet reference
+- Common words and phrase library
+- Animated gesture demonstrations
+- Advanced search and filtering
 
-**[Shailesh](https://github.com/Shailesh-dev13)** — Creator & Lead Developer
+### Community Features
+- Community discussion forums
+- Learning challenges and events
+- User-generated educational content
+- Collaboration features
 
-Contributions, issues, and feature requests are welcome! Feel free to open an issue or submit a pull request.
-
----
-
-## 📝 License
-
-This project is for educational and portfolio purposes.
-
----
-
-<div align="center">
-  <sub>Built with ❤️ by <a href="https://github.com/Shailesh-dev13">Shailesh</a></sub>
-</div>
+### Deployment & Scalability
+- Cloud deployment
+- Mobile optimization
+- API documentation
+- Analytics and monitoring
