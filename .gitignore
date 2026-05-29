@@ -34,16 +34,12 @@ env/
 htmlcov/
 
 # ── ML model files (too large for git) ──
-backend/models/asl_model.pth
-backend/models/hand_landmarker.task
 ml/trained_model/
 ml/data/
 *.keras
 *.h5
 *.tflite
 *.onnx
-*.pth
-*.pt
 *.safetensors
 temp_saved_model/
 
